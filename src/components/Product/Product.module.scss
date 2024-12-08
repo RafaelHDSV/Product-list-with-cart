@@ -56,6 +56,16 @@
   }
 }
 
+.actionIconButton {
+  outline: 0;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  cursor: pointer;
+}
+
 .productInfo {
   display: flex;
   flex-direction: column;

@@ -11,25 +11,27 @@ interface IProductProps {
   data: IProductDataProps
   cart: { name: string; quantity: number }[]
   onAddToCart: (product: string) => void
+  onRemoveToCart: (product: string) => void
 }
 
-export default function Product({ data, cart, onAddToCart }: IProductProps) {
-  console.log(cart)
-
+export default function Product({ data, cart, onAddToCart, onRemoveToCart }: IProductProps) {
   return (
     <div className={styles.product}>
       <img className={styles.productImage} src={data.image.desktop} alt={data.name} />
 
       {cart[0]?.quantity > 0 && cart[0]?.name === data.name ? (
-        <button className={styles.updateCartButton}>
-          <img src='images/icon-decrement-quantity.svg' alt='icon-increment-quantity.svg' />
+        <div className={styles.updateCartButton}>
+          <button className={styles.actionIconButton} onClick={() => onRemoveToCart(data.name)}>
+            <img src='images/icon-decrement-quantity.svg' alt='icon-increment-quantity.svg' />
+          </button>
           <span>{cart[0]?.quantity}</span>
-          <img src='images/icon-increment-quantity.svg' alt='icon-increment-quantity.svg' />
-        </button>
+          <button className={styles.actionIconButton} onClick={() => onAddToCart(data.name)}>
+            <img src='images/icon-increment-quantity.svg' alt='icon-increment-quantity.svg' />
+          </button>
+        </div>
       ) : (
         <button className={styles.addCartButton} onClick={() => onAddToCart(data.name)}>
           <img src='images/icon-add-to-cart.svg' alt='icon-add-to-cart.svg' />
-
           <span>Add to Cart</span>
         </button>
       )}
