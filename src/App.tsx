@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Product from './components/Product/Product'
+import CartItem from './components/CartItem/CartItem'
 import data from './data/data.json'
 import styles from './App.module.scss'
 
@@ -37,18 +38,16 @@ export default function App() {
         </div>
 
         <div className={styles.cart}>
-          <h2>{`Your Cart (${cart.length})`}</h2>
+          <h2>{`Your Cart (${cart.reduce((total, productCart) => total + productCart.quantity, 0)})`}</h2>
 
-          {!cart.length && (
+          {!cart.length ? (
             <div className={styles.cartEmpty}>
               <img src='images/illustration-empty-cart.svg' alt='illustration-empty-cart.svg' />
               <span>Your added items will appear here</span>
             </div>
+          ) : (
+            <CartItem cartInfo={cart} productInfo={data} />
           )}
-
-          {cart.map((product, index) => {
-            return <span key={index}>{`${index} - ${product.name} (Quantity: ${product.quantity})`}</span>
-          })}
         </div>
       </div>
 
