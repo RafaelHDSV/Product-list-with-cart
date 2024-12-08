@@ -30,14 +30,37 @@
   font-weight: 600;
 }
 
-.removeIcon {
+.removeIconButton {
+  outline: 0;
+  border: none;
   position: absolute;
   top: 50%;
   right: 0;
   transform: translate(-50%, -50%);
+  background: none;
+  cursor: pointer;
+}
+
+.removeIcon {
   width: 17px;
   height: 17px;
   border-radius: 50%;
   padding: 1.5px;
   border: 1.5px solid var(--rose-400);
+}
+
+.orderTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.orderTotalLabel {
+  font-size: 14px;
+  font-weight: 500;
+}
+.orderTotalValue {
+  font-size: 22px;
+  font-weight: 700;
 }

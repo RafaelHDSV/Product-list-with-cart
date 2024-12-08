@@ -9,18 +9,27 @@ export default function App() {
 
   const handleAddToCart = (productName: string) => {
     setCart(prevCart => {
-      const existingProductIndex = prevCart.findIndex(item => item.name === productName)
-      if (existingProductIndex !== -1) {
-        const updatedCart = [...prevCart]
-        updatedCart[existingProductIndex].quantity += 1
-        return updatedCart
-      } else {
-        return [...prevCart, { name: productName, quantity: 1 }]
+      const updatedCart = prevCart.map(item => (item.name === productName ? { ...item, quantity: item.quantity + 1 } : item))
+      if (!updatedCart.some(item => item.name === productName)) {
+        updatedCart.push({ name: productName, quantity: 1 })
       }
+      return updatedCart
     })
   }
 
-  console.log(cart)
+  const handleRemoveToCart = (productName: string) => {
+    setCart(prevCart => {
+      const updatedCart = prevCart.map(item => (item.name === productName ? { ...item, quantity: item.quantity - 1 } : item)).filter(item => item.quantity > 0)
+      return updatedCart
+    })
+  }
+
+  const handleDeleteToCart = (productName: string) => {
+    setCart(prevCart => {
+      const updatedCart = prevCart.filter(item => item.name !== productName)
+      return updatedCart
+    })
+  }
 
   return (
     <div className={styles.app}>
@@ -31,7 +40,13 @@ export default function App() {
           <div className={styles.productList}>
             {data.map(product => {
               return (
-                <Product key={product.name} data={product} cart={cart.filter(productCart => productCart.name === product.name)} onAddToCart={handleAddToCart} />
+                <Product
+                  key={product.name}
+                  data={product}
+                  cart={cart.filter(productCart => productCart.name === product.name)}
+                  onAddToCart={handleAddToCart}
+                  onRemoveToCart={handleRemoveToCart}
+                />
               )
             })}
           </div>
@@ -46,7 +61,7 @@ export default function App() {
               <span>Your added items will appear here</span>
             </div>
           ) : (
-            <CartItem cartInfo={cart} productInfo={data} />
+            <CartItem cartInfo={cart} productInfo={data} onDeleteToCart={handleDeleteToCart} />
           )}
         </div>
       </div>
