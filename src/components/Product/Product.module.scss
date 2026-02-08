@@ -5,6 +5,11 @@
   align-items: center;
 }
 
+.productInCart {
+  border: 3px solid var(--red);
+  border-radius: .5rem;
+}
+
 .productImage {
   width: 100%;
   border-radius: 1rem;

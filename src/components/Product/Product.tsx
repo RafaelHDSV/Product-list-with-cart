@@ -14,23 +14,49 @@ interface IProductProps {
   onRemoveToCart: (product: string) => void
 }
 
-export default function Product({ data, cart, onAddToCart, onRemoveToCart }: IProductProps) {
+export default function Product({
+  data,
+  cart,
+  onAddToCart,
+  onRemoveToCart
+}: IProductProps) {
+  const hasProductInCart = cart[0]?.quantity > 0 && cart[0]?.name === data.name
+
   return (
     <div className={styles.product}>
-      <img className={styles.productImage} src={data.image.desktop} alt={data.name} />
+      <img
+        className={`${styles.productImage}  ${hasProductInCart ? styles.productInCart : ''}`}
+        src={data.image.desktop}
+        alt={data.name}
+      />
 
-      {cart[0]?.quantity > 0 && cart[0]?.name === data.name ? (
+      {hasProductInCart ? (
         <div className={styles.updateCartButton}>
-          <button className={styles.actionIconButton} onClick={() => onRemoveToCart(data.name)}>
-            <img src='images/icon-decrement-quantity.svg' alt='icon-increment-quantity.svg' />
+          <button
+            className={styles.actionIconButton}
+            onClick={() => onRemoveToCart(data.name)}
+          >
+            <img
+              src='images/icon-decrement-quantity.svg'
+              alt='icon-increment-quantity.svg'
+            />
           </button>
           <span>{cart[0]?.quantity}</span>
-          <button className={styles.actionIconButton} onClick={() => onAddToCart(data.name)}>
-            <img src='images/icon-increment-quantity.svg' alt='icon-increment-quantity.svg' />
+          <button
+            className={styles.actionIconButton}
+            onClick={() => onAddToCart(data.name)}
+          >
+            <img
+              src='images/icon-increment-quantity.svg'
+              alt='icon-increment-quantity.svg'
+            />
           </button>
         </div>
       ) : (
-        <button className={styles.addCartButton} onClick={() => onAddToCart(data.name)}>
+        <button
+          className={styles.addCartButton}
+          onClick={() => onAddToCart(data.name)}
+        >
           <img src='images/icon-add-to-cart.svg' alt='icon-add-to-cart.svg' />
           <span>Add to Cart</span>
         </button>
