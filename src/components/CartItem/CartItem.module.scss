@@ -64,3 +64,26 @@
   font-size: 22px;
   font-weight: 700;
 }
+
+.carbonNeutralInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0;
+  margin: 1.5rem 0;
+  background-color: var(--rose-100);
+  font-size: 14px;
+  border-radius: 0.5rem;
+}
+
+.confirmOrderButton {
+  background-color: var(--red);
+  color: white;
+  border: none;
+  padding: 1rem 0;
+  border-radius: 5rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+}
