@@ -1,4 +1,5 @@
 import styles from './Product.module.scss'
+import PlusIcon from '/images/icon-increment-quantity.svg'
 
 interface IProductDataProps {
   image: { thumbnail: string; mobile: string; tablet: string; desktop: string }
@@ -46,10 +47,7 @@ export default function Product({
             className={styles.actionIconButton}
             onClick={() => onAddToCart(data.name)}
           >
-            <img
-              src='images/icon-increment-quantity.svg'
-              alt='icon-increment-quantity.svg'
-            />
+            <img src={PlusIcon} alt='icon-increment-quantity' />
           </button>
         </div>
       ) : (
