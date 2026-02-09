@@ -1,3 +1,4 @@
+import { AddToCartIcon } from '../../assets/icons/AddToCartIcon'
 import { DecrementIcon } from '../../assets/icons/DecrementIcon'
 import { IncrementIcon } from '../../assets/icons/IncrementIcon'
 import styles from './Product.module.scss'
@@ -53,7 +54,7 @@ export default function Product({
           className={styles.addCartButton}
           onClick={() => onAddToCart(data.name)}
         >
-          <img src='images/icon-add-to-cart.svg' alt='icon-add-to-cart.svg' />
+          <AddToCartIcon />
           <span>Add to Cart</span>
         </button>
       )}

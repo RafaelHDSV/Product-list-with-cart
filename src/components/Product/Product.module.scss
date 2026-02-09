@@ -36,6 +36,12 @@
     transition: 200ms all ease-in-out;
     cursor: pointer;
   }
+
+  svg {
+    color: var(--red);
+    width: 22px;
+    height: 22px;
+  }
 }
 
 .updateCartButton {
