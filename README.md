@@ -126,7 +126,7 @@ O objetivo foi desenvolver uma interface moderna e responsiva que permita ao usu
   https://github.com/RafaelHDSV/product-list-with-cart
 
 - 🌐 **Live Site:**  
-  _(adicione aqui quando publicar)_
+  https://product-list-with-cart-rafael.vercel.app/
 
 ---
 
