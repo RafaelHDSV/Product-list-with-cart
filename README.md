@@ -6,7 +6,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/RafaelHDSV/Product-list-with-cart?style=for-the-badge)
 
 <p align="center">
-  <img src="./screenshot.jpg" alt="Product list with cart preview" width="700">
+  <img src="./screenshot.png" alt="Product list with cart preview" width="700">
 </p>
 
 <p align="center">
