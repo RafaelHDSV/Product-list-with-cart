@@ -1,21 +1,12 @@
 import { useMemo } from 'react'
 import { CarbonNeutralIcon } from '../../assets/icons/CarbonNeutralIcon'
 import { CloseIcon } from '../../assets/icons/CloseIcon'
+import { IProductDataProps } from '../../interfaces'
 import styles from './CartItem.module.scss'
 
 interface ICartItemProps {
   cartInfo: { name: string; quantity: number }[]
-  productInfo: {
-    image: {
-      thumbnail: string
-      mobile: string
-      tablet: string
-      desktop: string
-    }
-    name: string
-    category: string
-    price: number
-  }[]
+  productInfo: IProductDataProps[]
   setCart: React.Dispatch<
     React.SetStateAction<{ name: string; quantity: number }[]>
   >
@@ -73,17 +64,7 @@ function CartItemCard({
   setCart: React.Dispatch<
     React.SetStateAction<{ name: string; quantity: number }[]>
   >
-  productInfo: {
-    image: {
-      thumbnail: string
-      mobile: string
-      tablet: string
-      desktop: string
-    }
-    name: string
-    category: string
-    price: number
-  }[]
+  productInfo: IProductDataProps[]
 }) {
   const product = productInfo.find((product) => product.name === cartItem.name)
   const totalPrice = (cartItem.quantity * (product?.price ?? 0)).toFixed(2)

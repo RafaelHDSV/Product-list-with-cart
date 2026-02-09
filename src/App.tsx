@@ -7,33 +7,6 @@ import data from './data/data.json'
 export default function App() {
   const [cart, setCart] = useState<{ name: string; quantity: number }[]>([])
 
-  const handleAddToCart = (productName: string) => {
-    setCart((prevCart) => {
-      const updatedCart = prevCart.map((item) =>
-        item.name === productName
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      )
-      if (!updatedCart.some((item) => item.name === productName)) {
-        updatedCart.push({ name: productName, quantity: 1 })
-      }
-      return updatedCart
-    })
-  }
-
-  const handleRemoveToCart = (productName: string) => {
-    setCart((prevCart) => {
-      const updatedCart = prevCart
-        .map((item) =>
-          item.name === productName
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
-        )
-        .filter((item) => item.quantity > 0)
-      return updatedCart
-    })
-  }
-
   return (
     <div className={styles.app}>
       <div className={styles.main}>
@@ -42,15 +15,16 @@ export default function App() {
 
           <div className={styles.productList}>
             {data.map((product) => {
+              const filteredCart = cart.filter(
+                (productCart) => productCart.name === product.name
+              )
+
               return (
                 <Product
                   key={product.name}
                   data={product}
-                  cart={cart.filter(
-                    (productCart) => productCart.name === product.name
-                  )}
-                  onAddToCart={handleAddToCart}
-                  onRemoveToCart={handleRemoveToCart}
+                  cart={filteredCart}
+                  setCart={setCart}
                 />
               )
             })}
