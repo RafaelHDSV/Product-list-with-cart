@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import styles from './App.module.scss'
+import { SuccessIcon } from './assets/icons/SuccessIcon'
+import Button from './components/Button/Button'
 import Cart from './components/Cart/Cart'
 import { Modal } from './components/Modal/Modal'
 import Product from './components/Product/Product'
 import data from './data/data.json'
 
 export default function App() {
+  const [cart, setCart] = useState<{ name: string; quantity: number }[]>([])
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   function handleOpenModal() {
@@ -19,28 +22,56 @@ export default function App() {
   return (
     <>
       <Modal open={isModalOpen} onClose={handleCloseModal}>
-        <ModalContent onClose={handleCloseModal} />
+        <ModalContent cart={cart} onClose={handleCloseModal} />
       </Modal>
 
-      <Main handleOpenModal={handleOpenModal} />
+      <Main cart={cart} setCart={setCart} handleOpenModal={handleOpenModal} />
     </>
   )
 }
 
-function ModalContent({ onClose }: { onClose: () => void }) {
+function ModalContent({
+  // cart,
+  onClose
+}: {
+  cart: { name: string; quantity: number }[]
+  onClose: () => void
+}) {
   return (
-    <>
-      <h2>Confirmação</h2>
-      <p>Deseja finalizar o pedido?</p>
+    <div className={styles.modalContent}>
+      <SuccessIcon className={styles.successIcon} />
 
-      <button onClick={onClose}>Fechar</button>
-    </>
+      <h2>Order Confirmed</h2>
+      <p>We hope you enjoy your food!</p>
+
+      {/* {cart.length > 0 && (
+        <div className={styles.orderSummary}>
+          <h3>Order Summary</h3>
+
+          <ul>
+            {cart.map((product) => (
+              <li key={product.name}>
+                {product.quantity}x {product.name}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )} */}
+
+      <Button onClick={onClose}>Start New Order</Button>
+    </div>
   )
 }
 
-function Main({ handleOpenModal }: { handleOpenModal: () => void }) {
-  const [cart, setCart] = useState<{ name: string; quantity: number }[]>([])
+interface IMainProps {
+  cart: { name: string; quantity: number }[]
+  setCart: React.Dispatch<
+    React.SetStateAction<{ name: string; quantity: number }[]>
+  >
+  handleOpenModal: () => void
+}
 
+function Main({ cart, setCart, handleOpenModal }: IMainProps) {
   return (
     <div className={styles.app}>
       <div className={styles.main}>
