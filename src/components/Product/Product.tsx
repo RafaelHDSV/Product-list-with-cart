@@ -1,5 +1,6 @@
+import { DecrementIcon } from '../../assets/icons/DecrementIcon'
+import { IncrementIcon } from '../../assets/icons/IncrementIcon'
 import styles from './Product.module.scss'
-import PlusIcon from '/images/icon-increment-quantity.svg'
 
 interface IProductDataProps {
   image: { thumbnail: string; mobile: string; tablet: string; desktop: string }
@@ -37,17 +38,14 @@ export default function Product({
             className={styles.actionIconButton}
             onClick={() => onRemoveToCart(data.name)}
           >
-            <img
-              src='images/icon-decrement-quantity.svg'
-              alt='icon-increment-quantity.svg'
-            />
+            <DecrementIcon className={styles.icon} />
           </button>
           <span>{cart[0]?.quantity}</span>
           <button
             className={styles.actionIconButton}
             onClick={() => onAddToCart(data.name)}
           >
-            <img src={PlusIcon} alt='icon-increment-quantity' />
+            <IncrementIcon className={styles.icon} />
           </button>
         </div>
       ) : (

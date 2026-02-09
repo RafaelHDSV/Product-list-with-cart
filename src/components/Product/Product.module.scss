@@ -69,15 +69,19 @@
   align-items: center;
   background: none;
   cursor: pointer;
-  // FIXME: Hover não funciona, provavelmente por conta do SVG
-  color: yellow;
+}
 
-  svg {
-    fill: orange;
-  }
+.icon {
+  color: var(--rose-100);
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--rose-100);
+  border-radius: 50%;
+  padding: 4px;
 
   &:hover {
-    color: red;
+    background-color: var(--rose-100);
+    color: var(--red);
   }
 }
 
