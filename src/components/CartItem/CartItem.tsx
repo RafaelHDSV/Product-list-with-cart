@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { CarbonNeutralIcon } from '../../assets/icons/CarbonNeutralIcon'
 import { CloseIcon } from '../../assets/icons/CloseIcon'
+import data from '../../data/data.json'
 import { IProductDataProps } from '../../interfaces'
 import Button from '../Button/Button'
 import styles from './CartItem.module.scss'
@@ -99,6 +100,7 @@ function CartItemCard({
 }) {
   const product = productInfo.find((product) => product.name === cartItem.name)
   const totalPrice = (cartItem.quantity * (product?.price ?? 0)).toFixed(2)
+  const selectedProduct = data.find((product) => product.name === cartItem.name)
 
   const onDeleteToCart = (productName?: string) => {
     if (!productName) return
@@ -112,14 +114,22 @@ function CartItemCard({
   if (isResultDisplayed) {
     return (
       <div className={styles.resultCartItem}>
-        <div className={styles.productInfo}>
-          <p className={styles.productName}>{cartItem.name}</p>
+        <div className={styles.productDetails}>
+          <img
+            className={styles.productImage}
+            src={selectedProduct?.image.desktop}
+            alt={selectedProduct?.name}
+          />
 
-          <div className={styles.priceInfo}>
-            <span className={styles.quantity}>{`${cartItem.quantity}x`}</span>
-            <span
-              className={styles.unitPrice}
-            >{`@ $${product?.price.toFixed(2)}`}</span>
+          <div className={styles.productInfo}>
+            <p className={styles.productName}>{cartItem.name}</p>
+
+            <div className={styles.priceInfo}>
+              <span className={styles.quantity}>{`${cartItem.quantity}x`}</span>
+              <span
+                className={styles.unitPrice}
+              >{`@ $${product?.price.toFixed(2)}`}</span>
+            </div>
           </div>
         </div>
 

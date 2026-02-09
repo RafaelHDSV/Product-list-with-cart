@@ -118,6 +118,16 @@
   padding-bottom: 1rem;
   margin-bottom: 1rem;
 
+  .productDetails {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .productImage {
+    width: 60px;
+    border-radius: 0.5rem;
+  }
+
   .productInfo {
     display: flex;
     flex-direction: column;
