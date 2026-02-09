@@ -8,9 +8,10 @@ interface ICartProps {
   setCart: React.Dispatch<
     React.SetStateAction<{ name: string; quantity: number }[]>
   >
+  handleOpenModal: () => void
 }
 
-export default function Cart({ cart, setCart }: ICartProps) {
+export default function Cart({ cart, setCart, handleOpenModal }: ICartProps) {
   const totalItens = cart.reduce(
     (total, productCart) => total + productCart.quantity,
     0
@@ -20,12 +21,16 @@ export default function Cart({ cart, setCart }: ICartProps) {
     <div className={styles.cart}>
       <h2>{`Your Cart (${totalItens})`}</h2>
 
-      <CartContent cart={cart} setCart={setCart} />
+      <CartContent
+        cart={cart}
+        setCart={setCart}
+        handleOpenModal={handleOpenModal}
+      />
     </div>
   )
 }
 
-function CartContent({ cart, setCart }: ICartProps) {
+function CartContent({ cart, setCart, handleOpenModal }: ICartProps) {
   const hasItemsInCart = cart.length > 0
 
   if (!hasItemsInCart) {
@@ -37,5 +42,12 @@ function CartContent({ cart, setCart }: ICartProps) {
     )
   }
 
-  return <CartItem cartInfo={cart} productInfo={data} setCart={setCart} />
+  return (
+    <CartItem
+      cartInfo={cart}
+      productInfo={data}
+      setCart={setCart}
+      handleOpenModal={handleOpenModal}
+    />
+  )
 }

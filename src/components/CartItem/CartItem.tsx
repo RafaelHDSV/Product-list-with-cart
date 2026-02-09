@@ -10,12 +10,14 @@ interface ICartItemProps {
   setCart: React.Dispatch<
     React.SetStateAction<{ name: string; quantity: number }[]>
   >
+  handleOpenModal: () => void
 }
 
 export default function CartItem({
   cartInfo,
   productInfo,
-  setCart
+  setCart,
+  handleOpenModal
 }: ICartItemProps) {
   const total = useMemo(() => {
     const totalPrice = cartInfo.reduce((total, cartItem) => {
@@ -54,7 +56,9 @@ export default function CartItem({
         </p>
       </div>
 
-      <button className={styles.confirmOrderButton}>Confirm Order</button>
+      <button className={styles.confirmOrderButton} onClick={handleOpenModal}>
+        Confirm Order
+      </button>
     </div>
   )
 }
