@@ -8,14 +8,31 @@ interface ICartProps {
   setCart: React.Dispatch<
     React.SetStateAction<{ name: string; quantity: number }[]>
   >
-  handleOpenModal: () => void
+  handleOpenModal?: () => void
+  isResultDisplayed?: boolean
 }
 
-export default function Cart({ cart, setCart, handleOpenModal }: ICartProps) {
+export default function Cart({
+  cart,
+  setCart,
+  handleOpenModal,
+  isResultDisplayed
+}: ICartProps) {
   const totalItens = cart.reduce(
     (total, productCart) => total + productCart.quantity,
     0
   )
+
+  if (isResultDisplayed) {
+    return (
+      <CartContent
+        cart={cart}
+        setCart={setCart}
+        handleOpenModal={handleOpenModal}
+        isResultDisplayed
+      />
+    )
+  }
 
   return (
     <div className={styles.cart}>
@@ -30,7 +47,12 @@ export default function Cart({ cart, setCart, handleOpenModal }: ICartProps) {
   )
 }
 
-function CartContent({ cart, setCart, handleOpenModal }: ICartProps) {
+function CartContent({
+  cart,
+  setCart,
+  handleOpenModal,
+  isResultDisplayed
+}: ICartProps) {
   const hasItemsInCart = cart.length > 0
 
   if (!hasItemsInCart) {
@@ -48,6 +70,7 @@ function CartContent({ cart, setCart, handleOpenModal }: ICartProps) {
       productInfo={data}
       setCart={setCart}
       handleOpenModal={handleOpenModal}
+      isResultDisplayed={isResultDisplayed}
     />
   )
 }

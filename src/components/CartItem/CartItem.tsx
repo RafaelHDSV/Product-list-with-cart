@@ -11,14 +11,16 @@ interface ICartItemProps {
   setCart: React.Dispatch<
     React.SetStateAction<{ name: string; quantity: number }[]>
   >
-  handleOpenModal: () => void
+  handleOpenModal?: () => void
+  isResultDisplayed?: boolean
 }
 
 export default function CartItem({
   cartInfo,
   productInfo,
   setCart,
-  handleOpenModal
+  handleOpenModal,
+  isResultDisplayed
 }: ICartItemProps) {
   const total = useMemo(() => {
     const totalPrice = cartInfo.reduce((total, cartItem) => {
@@ -34,6 +36,26 @@ export default function CartItem({
   const cartInfoSorted = useMemo(() => {
     return [...cartInfo].sort((a, b) => a.name.localeCompare(b.name))
   }, [cartInfo])
+
+  if (isResultDisplayed) {
+    return (
+      <div className={styles.resultCart}>
+        {cartInfoSorted.map((cartItem) => (
+          <CartItemCard
+            cartItem={cartItem}
+            setCart={setCart}
+            productInfo={productInfo}
+            isResultDisplayed={isResultDisplayed}
+          />
+        ))}
+
+        <div className={styles.orderTotal}>
+          <span className={styles.orderTotalLabel}>Order Total</span>
+          <span className={styles.orderTotalValue}>{`$${total}`}</span>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div>
@@ -65,13 +87,15 @@ export default function CartItem({
 function CartItemCard({
   cartItem,
   setCart,
-  productInfo
+  productInfo,
+  isResultDisplayed
 }: {
   cartItem: { name: string; quantity: number }
   setCart: React.Dispatch<
     React.SetStateAction<{ name: string; quantity: number }[]>
   >
   productInfo: IProductDataProps[]
+  isResultDisplayed?: boolean
 }) {
   const product = productInfo.find((product) => product.name === cartItem.name)
   const totalPrice = (cartItem.quantity * (product?.price ?? 0)).toFixed(2)
@@ -83,6 +107,25 @@ function CartItemCard({
       const updatedCart = prevCart.filter((item) => item.name !== productName)
       return updatedCart
     })
+  }
+
+  if (isResultDisplayed) {
+    return (
+      <div className={styles.resultCartItem}>
+        <div className={styles.productInfo}>
+          <p className={styles.productName}>{cartItem.name}</p>
+
+          <div className={styles.priceInfo}>
+            <span className={styles.quantity}>{`${cartItem.quantity}x`}</span>
+            <span
+              className={styles.unitPrice}
+            >{`@ $${product?.price.toFixed(2)}`}</span>
+          </div>
+        </div>
+
+        <span className={styles.price}>{`$${totalPrice}`}</span>
+      </div>
+    )
   }
 
   return (

@@ -22,7 +22,11 @@ export default function App() {
   return (
     <>
       <Modal open={isModalOpen} onClose={handleCloseModal}>
-        <ModalContent cart={cart} onClose={handleCloseModal} />
+        <ModalContent
+          cart={cart}
+          setCart={setCart}
+          onClose={handleCloseModal}
+        />
       </Modal>
 
       <Main cart={cart} setCart={setCart} handleOpenModal={handleOpenModal} />
@@ -31,10 +35,14 @@ export default function App() {
 }
 
 function ModalContent({
-  // cart,
+  cart,
+  setCart,
   onClose
 }: {
   cart: { name: string; quantity: number }[]
+  setCart: React.Dispatch<
+    React.SetStateAction<{ name: string; quantity: number }[]>
+  >
   onClose: () => void
 }) {
   return (
@@ -44,19 +52,7 @@ function ModalContent({
       <h2>Order Confirmed</h2>
       <p>We hope you enjoy your food!</p>
 
-      {/* {cart.length > 0 && (
-        <div className={styles.orderSummary}>
-          <h3>Order Summary</h3>
-
-          <ul>
-            {cart.map((product) => (
-              <li key={product.name}>
-                {product.quantity}x {product.name}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )} */}
+      <Cart cart={cart} setCart={setCart} isResultDisplayed />
 
       <Button onClick={onClose}>Start New Order</Button>
     </div>
