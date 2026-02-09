@@ -3,38 +3,36 @@ import data from '../../data/data.json'
 import CartItem from '../CartItem/CartItem'
 import styles from './Cart.module.scss'
 
-export default function Cart({
-  cart,
-  setCart
-}: {
+interface ICartProps {
   cart: { name: string; quantity: number }[]
   setCart: React.Dispatch<
     React.SetStateAction<{ name: string; quantity: number }[]>
   >
-}) {
-  const handleDeleteToCart = (productName: string) => {
-    setCart((prevCart) => {
-      const updatedCart = prevCart.filter((item) => item.name !== productName)
-      return updatedCart
-    })
-  }
+}
 
-  return (
-    <div className={styles.cart}>
-      <h2>{`Your Cart (${cart.reduce((total, productCart) => total + productCart.quantity, 0)})`}</h2>
+export default function Cart({ cart, setCart }: ICartProps) {
+  const hasItemsInCart = cart.length > 0
+  const totalItens = cart.reduce(
+    (total, productCart) => total + productCart.quantity,
+    0
+  )
 
-      {!cart.length ? (
+  if (!hasItemsInCart) {
+    return (
+      <div className={styles.cart}>
         <div className={styles.cartEmpty}>
           <EmptyCartIcon />
           <span>Your added items will appear here</span>
         </div>
-      ) : (
-        <CartItem
-          cartInfo={cart}
-          productInfo={data}
-          onDeleteToCart={handleDeleteToCart}
-        />
-      )}
+      </div>
+    )
+  }
+
+  return (
+    <div className={styles.cart}>
+      <h2>{`Your Cart (${totalItens})`}</h2>
+
+      <CartItem cartInfo={cart} productInfo={data} setCart={setCart} />
     </div>
   )
 }

@@ -60,22 +60,22 @@ export default function App() {
         <Cart cart={cart} setCart={setCart} />
       </div>
 
-      <div className={styles.attribution}>
+      <footer className={styles.attribution}>
         <p>
-          Challenge by{' '}
+          Challenge by
           <a href='https://www.frontendmentor.io?ref=challenge' target='_blank'>
             Frontend Mentor
           </a>
           .
         </p>
         <p>
-          Coded by{' '}
+          Coded by
           <a href='https://github.com/RafaelHDSV' target='_blank'>
             Rafael Henrique de Sousa Vieira
           </a>
           .
         </p>
-      </div>
+      </footer>
     </div>
   )
 }
