@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import styles from './App.module.scss'
-import { EmptyCartIcon } from './assets/icons/EmptyCartIcon'
-import CartItem from './components/CartItem/CartItem'
+import Cart from './components/Cart/Cart'
 import Product from './components/Product/Product'
 import data from './data/data.json'
 
@@ -35,13 +34,6 @@ export default function App() {
     })
   }
 
-  const handleDeleteToCart = (productName: string) => {
-    setCart((prevCart) => {
-      const updatedCart = prevCart.filter((item) => item.name !== productName)
-      return updatedCart
-    })
-  }
-
   return (
     <div className={styles.app}>
       <div className={styles.main}>
@@ -65,27 +57,25 @@ export default function App() {
           </div>
         </div>
 
-        <div className={styles.cart}>
-          <h2>{`Your Cart (${cart.reduce((total, productCart) => total + productCart.quantity, 0)})`}</h2>
-
-          {!cart.length ? (
-            <div className={styles.cartEmpty}>
-              <EmptyCartIcon />
-              <span>Your added items will appear here</span>
-            </div>
-          ) : (
-            <CartItem
-              cartInfo={cart}
-              productInfo={data}
-              onDeleteToCart={handleDeleteToCart}
-            />
-          )}
-        </div>
+        <Cart cart={cart} setCart={setCart} />
       </div>
 
-      {/* <div className={styles.attribution}>
-        Challenge by <a href='https://www.frontendmentor.io?ref=challenge'>Frontend Mentor</a>. Coded by <a href='#'>Your Name Here</a>.
-      </div> */}
+      <div className={styles.attribution}>
+        <p>
+          Challenge by{' '}
+          <a href='https://www.frontendmentor.io?ref=challenge' target='_blank'>
+            Frontend Mentor
+          </a>
+          .
+        </p>
+        <p>
+          Coded by{' '}
+          <a href='https://github.com/RafaelHDSV' target='_blank'>
+            Rafael Henrique de Sousa Vieira
+          </a>
+          .
+        </p>
+      </div>
     </div>
   )
 }
