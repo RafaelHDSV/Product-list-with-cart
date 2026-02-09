@@ -11,28 +11,31 @@ interface ICartProps {
 }
 
 export default function Cart({ cart, setCart }: ICartProps) {
-  const hasItemsInCart = cart.length > 0
   const totalItens = cart.reduce(
     (total, productCart) => total + productCart.quantity,
     0
   )
 
-  if (!hasItemsInCart) {
-    return (
-      <div className={styles.cart}>
-        <div className={styles.cartEmpty}>
-          <EmptyCartIcon />
-          <span>Your added items will appear here</span>
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div className={styles.cart}>
       <h2>{`Your Cart (${totalItens})`}</h2>
 
-      <CartItem cartInfo={cart} productInfo={data} setCart={setCart} />
+      <CartContent cart={cart} setCart={setCart} />
     </div>
   )
+}
+
+function CartContent({ cart, setCart }: ICartProps) {
+  const hasItemsInCart = cart.length > 0
+
+  if (!hasItemsInCart) {
+    return (
+      <div className={styles.cartEmpty}>
+        <EmptyCartIcon />
+        <span>Your added items will appear here</span>
+      </div>
+    )
+  }
+
+  return <CartItem cartInfo={cart} productInfo={data} setCart={setCart} />
 }

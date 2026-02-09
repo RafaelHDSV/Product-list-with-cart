@@ -28,9 +28,13 @@ export default function CartItem({
     return totalPrice.toFixed(2)
   }, [cartInfo, productInfo])
 
+  const cartInfoSorted = useMemo(() => {
+    return [...cartInfo].sort((a, b) => a.name.localeCompare(b.name))
+  }, [cartInfo])
+
   return (
     <div>
-      {cartInfo.map((cartItem) => (
+      {cartInfoSorted.map((cartItem) => (
         <CartItemCard
           cartItem={cartItem}
           setCart={setCart}
