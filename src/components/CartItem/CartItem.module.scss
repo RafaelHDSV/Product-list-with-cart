@@ -90,19 +90,3 @@
     color: var(--green-500);
   }
 }
-
-.confirmOrderButton {
-  background-color: var(--red);
-  color: var(--rose-100);
-  border: none;
-  padding: 1rem 0;
-  border-radius: 5rem;
-  font-weight: 600;
-  cursor: pointer;
-  width: 100%;
-
-  &:hover {
-    background-color: var(--red-hover);
-    transition: 200ms all ease-in-out;
-  }
-}

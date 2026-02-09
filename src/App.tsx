@@ -19,13 +19,21 @@ export default function App() {
   return (
     <>
       <Modal open={isModalOpen} onClose={handleCloseModal}>
-        <h2>Confirmação</h2>
-        <p>Deseja finalizar o pedido?</p>
-
-        <button onClick={handleCloseModal}>Fechar</button>
+        <ModalContent onClose={handleCloseModal} />
       </Modal>
 
       <Main handleOpenModal={handleOpenModal} />
+    </>
+  )
+}
+
+function ModalContent({ onClose }: { onClose: () => void }) {
+  return (
+    <>
+      <h2>Confirmação</h2>
+      <p>Deseja finalizar o pedido?</p>
+
+      <button onClick={onClose}>Fechar</button>
     </>
   )
 }

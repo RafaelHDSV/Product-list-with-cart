@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { CarbonNeutralIcon } from '../../assets/icons/CarbonNeutralIcon'
 import { CloseIcon } from '../../assets/icons/CloseIcon'
 import { IProductDataProps } from '../../interfaces'
+import Button from '../Button/Button'
 import styles from './CartItem.module.scss'
 
 interface ICartItemProps {
@@ -56,9 +57,7 @@ export default function CartItem({
         </p>
       </div>
 
-      <button className={styles.confirmOrderButton} onClick={handleOpenModal}>
-        Confirm Order
-      </button>
+      <Button onClick={handleOpenModal}>Confirm Order</Button>
     </div>
   )
 }
