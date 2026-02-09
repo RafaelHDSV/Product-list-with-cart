@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styles from './App.module.scss'
-import { EmptyCartIllustration } from './assets/icons/EmptyCartIllustration'
+import { EmptyCartIcon } from './assets/icons/EmptyCartIcon'
 import CartItem from './components/CartItem/CartItem'
 import Product from './components/Product/Product'
 import data from './data/data.json'
@@ -70,7 +70,7 @@ export default function App() {
 
           {!cart.length ? (
             <div className={styles.cartEmpty}>
-              <EmptyCartIllustration />
+              <EmptyCartIcon />
               <span>Your added items will appear here</span>
             </div>
           ) : (

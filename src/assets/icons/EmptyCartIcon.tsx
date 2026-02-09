@@ -1,4 +1,4 @@
-export function EmptyCartIllustration({ className }: { className?: string }) {
+export function EmptyCartIcon({ className }: { className?: string }) {
   return (
     <svg
       viewBox='0 0 128 128'
