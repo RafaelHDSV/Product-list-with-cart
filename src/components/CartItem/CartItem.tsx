@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { CarbonNeutralIcon } from '../../assets/icons/CarbonNeutralIcon'
 import styles from './CartItem.module.scss'
 
 interface ICartItemProps {
@@ -72,10 +73,7 @@ export default function CartItem({
       </div>
 
       <div className={styles.carbonNeutralInfo}>
-        <img
-          src='images/icon-carbon-neutral.svg'
-          alt='carbon-neutral delivery'
-        />
+        <CarbonNeutralIcon />
         <p>
           This is a <strong>carbon-neutral</strong> delivery
         </p>
