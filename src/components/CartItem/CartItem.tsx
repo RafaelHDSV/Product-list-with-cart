@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { CarbonNeutralIcon } from '../../assets/icons/CarbonNeutralIcon'
+import { CloseIcon } from '../../assets/icons/CloseIcon'
 import styles from './CartItem.module.scss'
 
 interface ICartItemProps {
@@ -57,11 +58,7 @@ export default function CartItem({
               className={styles.removeIconButton}
               onClick={() => onDeleteToCart(product?.name ?? '')}
             >
-              <img
-                className={styles.removeIcon}
-                src='images/icon-remove-item.svg'
-                alt='icon-remove-item.svg'
-              />
+              <CloseIcon className={styles.removeIcon} />
             </button>
           </div>
         )
