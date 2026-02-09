@@ -1,16 +1,21 @@
 import { useState } from 'react'
-import Product from './components/Product/Product'
-import CartItem from './components/CartItem/CartItem'
-import data from './data/data.json'
 import styles from './App.module.scss'
+import { EmptyCartIllustration } from './assets/icons/EmptyCartIllustration'
+import CartItem from './components/CartItem/CartItem'
+import Product from './components/Product/Product'
+import data from './data/data.json'
 
 export default function App() {
   const [cart, setCart] = useState<{ name: string; quantity: number }[]>([])
 
   const handleAddToCart = (productName: string) => {
-    setCart(prevCart => {
-      const updatedCart = prevCart.map(item => (item.name === productName ? { ...item, quantity: item.quantity + 1 } : item))
-      if (!updatedCart.some(item => item.name === productName)) {
+    setCart((prevCart) => {
+      const updatedCart = prevCart.map((item) =>
+        item.name === productName
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      )
+      if (!updatedCart.some((item) => item.name === productName)) {
         updatedCart.push({ name: productName, quantity: 1 })
       }
       return updatedCart
@@ -18,15 +23,21 @@ export default function App() {
   }
 
   const handleRemoveToCart = (productName: string) => {
-    setCart(prevCart => {
-      const updatedCart = prevCart.map(item => (item.name === productName ? { ...item, quantity: item.quantity - 1 } : item)).filter(item => item.quantity > 0)
+    setCart((prevCart) => {
+      const updatedCart = prevCart
+        .map((item) =>
+          item.name === productName
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
       return updatedCart
     })
   }
 
   const handleDeleteToCart = (productName: string) => {
-    setCart(prevCart => {
-      const updatedCart = prevCart.filter(item => item.name !== productName)
+    setCart((prevCart) => {
+      const updatedCart = prevCart.filter((item) => item.name !== productName)
       return updatedCart
     })
   }
@@ -38,12 +49,14 @@ export default function App() {
           <h1>Desserts</h1>
 
           <div className={styles.productList}>
-            {data.map(product => {
+            {data.map((product) => {
               return (
                 <Product
                   key={product.name}
                   data={product}
-                  cart={cart.filter(productCart => productCart.name === product.name)}
+                  cart={cart.filter(
+                    (productCart) => productCart.name === product.name
+                  )}
                   onAddToCart={handleAddToCart}
                   onRemoveToCart={handleRemoveToCart}
                 />
@@ -57,11 +70,15 @@ export default function App() {
 
           {!cart.length ? (
             <div className={styles.cartEmpty}>
-              <img src='images/illustration-empty-cart.svg' alt='illustration-empty-cart.svg' />
+              <EmptyCartIllustration />
               <span>Your added items will appear here</span>
             </div>
           ) : (
-            <CartItem cartInfo={cart} productInfo={data} onDeleteToCart={handleDeleteToCart} />
+            <CartItem
+              cartInfo={cart}
+              productInfo={data}
+              onDeleteToCart={handleDeleteToCart}
+            />
           )}
         </div>
       </div>
