@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# allow vendor SDK dist
+!vendor/vieira-analytics/dist/
+!vendor/vieira-analytics/dist/**
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
