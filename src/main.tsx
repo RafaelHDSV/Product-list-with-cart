@@ -1,3 +1,4 @@
+import { VisitCountSlot } from './VisitCountSlot'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
@@ -7,6 +8,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
     <VieiraAnalytics projectKey='product-list-with-cart' />
+    <VisitCountSlot />
   </StrictMode>,
 )
 
